@@ -25,9 +25,10 @@ export default class Login extends React.Component {
         this.setState({error:err.reason})
       }else{
         this.setState({error:''})
+        this.props.history.push('/link')
       }
     })
-    this.props.history.push('/link')
+
   }
   render(){
     return (

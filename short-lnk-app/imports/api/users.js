@@ -4,13 +4,15 @@ import {Accounts} from 'meteor/accounts-base'
 
 Accounts.validateNewUser((user)=>{
   const email= user.emails[0].address;
+  console.log(email)
   try{
     new SimpleSchema({
       email:{
         type:String,
-        regEx: SimpleSchema.RegEx.EmailWithTLD
+        regEx: SimpleSchema.RegEx.Email
       }
-    }).validate({email})
+    }).validate({email:email})
+    return true;
   }catch (e){
     throw new Meteor.Error(400,'Email is invalid')
   }
