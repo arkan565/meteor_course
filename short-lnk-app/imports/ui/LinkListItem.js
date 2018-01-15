@@ -27,19 +27,19 @@ export default class LinkListItem extends React.Component {
       lastvisited=moment(this.props.link.lastVisited).fromNow()
     }
     return (
-      <div>
+      <div  className="item">
         <p >{this.props.link.url}</p>
-        <p>{Meteor.absoluteUrl(this.props.link._id)}</p>
-        <p>{this.props.link.visitedCount} - {lastvisited}</p>
-        <button ref="copy" data-clipboard-text={Meteor.absoluteUrl(this.props.link._id)}>Copy</button>
-        <button ref="copy" data-clipboard-text={Meteor.absoluteUrl(this.props.link._id)}>
+        <p className="item__message">{Meteor.absoluteUrl(this.props.link._id)}</p>
+        <p className="item__message">{this.props.link.visitedCount} - {lastvisited}</p>
+        <button  className="button button--pill button--link" ref="copy" data-clipboard-text={Meteor.absoluteUrl(this.props.link._id)}>Copy</button>
+        <button className="button button--pill" ref="copy" data-clipboard-text={Meteor.absoluteUrl(this.props.link._id)}>
           {
             this.state.justCopied
               ? 'Copied'
               : 'Copy'
           }
         </button>
-        <button onClick={() => {
+        <button className="button button--pill" onClick={() => {
             Meteor.call('links.setVisibility', this.props.link._id, !this.props.link.visible);
           }}>
           {

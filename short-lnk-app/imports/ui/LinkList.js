@@ -4,6 +4,7 @@ import {Tracker} from 'meteor/tracker'
 import {Links} from '../api/links'
 import LinkListItem from './LinkListItem'
 import {Session} from 'meteor/session'
+import FlipMove from 'react-flip-move';
 
 export default class LinkList extends React.Component {
   constructor(props){
@@ -26,9 +27,22 @@ export default class LinkList extends React.Component {
     this.linksTracker.stop();
   }
   renderLinksListItems(){
-    return this.state.links.map((link)=>{
-         return <LinkListItem link={link} visible={true} key={link._id}/>
-         })
+    if( this.state.links.lenght!=0){
+      return this.state.links.map((link)=>{
+           return(
+             <FlipMove maintainContainerHeight={true}>
+               <LinkListItem link={link} visible={true} key={link._id}/>
+             </FlipMove>
+           )
+           })
+    }else{
+      return (
+        <div className="item">
+          <p className="item__status-message">No Links Found</p>
+        </div>
+      );
+    }
+
   }
   render(){
     return (
