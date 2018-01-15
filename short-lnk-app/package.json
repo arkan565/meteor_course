@@ -6,12 +6,14 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "f": "^1.4.0",
     "history": "^4.7.2",
     "meteor-node-stubs": "^0.3.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "shortid": "^2.2.8",
     "simpl-schema": "^1.4.1",
     "simple-schema": "^1.1.0"
   }

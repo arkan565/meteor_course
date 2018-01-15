@@ -1,6 +1,8 @@
+import {Meteor} from 'meteor/meteor'
 import React from 'react';
 import {Tracker} from 'meteor/tracker'
 import {Links} from '../api/links'
+
 
 export default class LinkList extends React.Component {
   constructor(props){
@@ -11,7 +13,8 @@ export default class LinkList extends React.Component {
   }
   componentDidMount(){
     this.linksTracker = Tracker.autorun(()=>{
-      let links=Links.find({}).fetch()
+      Meteor.subscribe('links')
+      let links=Links.find().fetch()
       this.setState({ links })
     })
   }
@@ -23,7 +26,7 @@ export default class LinkList extends React.Component {
   }
   renderLinksListItems(){
     return this.state.links.map((link)=>{
-         return(<p key={link.id}>{link.url}</p>)
+         return(<p  key ={link._id} >{link.url}</p>)
          })
   }
   render(){
