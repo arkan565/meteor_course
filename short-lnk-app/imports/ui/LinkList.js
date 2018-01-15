@@ -2,7 +2,8 @@ import {Meteor} from 'meteor/meteor'
 import React from 'react';
 import {Tracker} from 'meteor/tracker'
 import {Links} from '../api/links'
-
+import LinkListItem from './LinkListItem'
+import {Session} from 'meteor/session'
 
 export default class LinkList extends React.Component {
   constructor(props){
@@ -14,7 +15,7 @@ export default class LinkList extends React.Component {
   componentDidMount(){
     this.linksTracker = Tracker.autorun(()=>{
       Meteor.subscribe('links')
-      let links=Links.find().fetch()
+      let links=Links.find({visible:Session.get('showVisible')}).fetch()
       this.setState({ links })
     })
   }
@@ -26,7 +27,7 @@ export default class LinkList extends React.Component {
   }
   renderLinksListItems(){
     return this.state.links.map((link)=>{
-         return(<p  key ={link._id} >{link.url}</p>)
+         return <LinkListItem link={link} visible={true} key={link._id}/>
          })
   }
   render(){

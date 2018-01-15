@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Signup extends React.Component {
+export default class NotFound extends React.Component {
   render(){
     return <p>Not found link</p>
   }

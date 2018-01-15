@@ -3,6 +3,9 @@ import {Account} from 'meteor/meteor-base'
 import {Links} from '../api/links'
 import {Meteor} from 'meteor/meteor';
 import LinkList from './LinkList';
+import PrivateHeader from './PrivateHeader'
+import AddLink from './AddLink'
+import LinkListFilters from './LinkListFilters'
 
 export default class Link extends React.Component {
   constructor(props){
@@ -14,27 +17,14 @@ export default class Link extends React.Component {
       this.props.history.replace('/')
     }
   }
-  onSubmit(e){
-    const url=this.refs.url.value.trim();
-    e.preventDefault();
-    if(url){
-      Meteor.call('links.insert',url)
-      this.refs.url.value=''
-    }
-  }
   render(){
     return (
       <div>
-        <button onClick={()=>{
-          Accounts.logout();
-          this.props.history.push("/")
-        }}>logout</button>
-
-        <form onSubmit={this.onSubmit.bind(this)}>
-          <input type="text" ref="url" placeholder="URL"/>
-          <button>add link</button>
-        </form>
+        <LinkListFilters/>
+        <PrivateHeader title='MyLinks' history={this.props.history}/>
+        <AddLink />
         <LinkList />
+
       </div>
     )
   }
